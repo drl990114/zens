@@ -22,6 +22,9 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.png',
     lastUpdated: true,
+    socialLinks: {
+      github: 'https://github.com/drl990114/zens',
+    },
     footer: 'Open-source MIT Licensed | Copyright © 2024  <a href="https://github.com/drl990114">@drl990114</a>'
   },
   exportStatic: {},
