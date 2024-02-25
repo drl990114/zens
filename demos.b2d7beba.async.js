@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkzens=self.webpackChunkzens||[]).push([[433],{2493:function(t,e,s){s.r(e);var u=s(78328),n=s(85893);e.default=function(){return(0,n.jsxs)(u.Space,{children:[(0,n.jsx)(u.Button,{size:"small",children:"\u5C0F"}),(0,n.jsx)(u.Button,{children:"\u4E2D\uFF08\u9ED8\u8BA4\uFF09"}),(0,n.jsx)(u.Button,{size:"large",children:"\u5927"})]})}}}]);
