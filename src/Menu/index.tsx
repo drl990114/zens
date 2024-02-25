@@ -1,6 +1,8 @@
 import type { MenuProps as AkMenuProps } from '@ariakit/react';
-import { MenuButton, MenuButtonArrow, MenuItem, MenuProvider } from '@ariakit/react';
+import { MenuButton, MenuButtonArrow, MenuItem, MenuProvider, useMenuStore } from '@ariakit/react';
 import { MenuWrapper } from './MenuWrapper';
+
+export { useMenuStore };
 
 export type MenuItemData = {
   label: string;
@@ -17,7 +19,7 @@ interface MenuProps extends AkMenuProps {
 }
 
 const Menu = (props: MenuProps) => {
-  const { open, items, triggerBtnClass, style, children, ...rest } = props;
+  const { open, items, triggerBtnClass, store, style, children, ...rest } = props;
 
   const renderItems = (menuItems: MenuItemData[]) => {
     return menuItems.map((item) => {
@@ -31,7 +33,7 @@ const Menu = (props: MenuProps) => {
               <span className="menu-label">{item.label}</span>
               <MenuButtonArrow />
             </MenuItem>
-            <MenuWrapper onClose={rest.onClose}>{renderItems(item.children)}</MenuWrapper>
+            <MenuWrapper>{renderItems(item.children)}</MenuWrapper>
           </MenuProvider>
         );
       } else {
@@ -54,6 +56,14 @@ const Menu = (props: MenuProps) => {
       }
     });
   };
+
+  if (store) {
+    return (
+      <MenuWrapper style={style} store={store} {...rest}>
+        {renderItems(items)}
+      </MenuWrapper>
+    );
+  }
 
   return (
     <MenuProvider>

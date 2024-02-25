@@ -30,13 +30,6 @@ export default defineConfig({
   exportStatic: {},
   forkTSChecker: {},
   extraBabelPlugins: [
-    [
-      'import',
-      {
-        libraryName: 'zens',
-        libraryDirectory: '',
-        camel2DashComponentName: false,
-      },
-    ],
+
   ],
 });

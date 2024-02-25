@@ -24,6 +24,10 @@ export default () => {
         },
       ],
     },
+    {
+      label: 'menu3',
+      value: 'menu3',
+    }
   ];
 
   return (
