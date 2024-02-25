@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 
-import { darkTheme, lightTheme } from '@markflowy/theme';
+import { darkTheme, lightTheme } from '.';
 
 type Props = {
   theme?: {

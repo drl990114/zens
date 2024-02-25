@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import type { ITocListProps } from './type'
-import { darken, type ScThemeProps } from '@markflowy/theme'
+import { darken, type ScThemeProps } from '../Theme'
 
 export const TocDiv = styled.div`
   position: relative;

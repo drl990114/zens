@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import type { ButtonProps as AkButtonProps } from '@ariakit/react';
 import { Button as AkButton } from '@ariakit/react';
-import { darken } from '@markflowy/theme';
+import { darken } from '../Theme';
 
 type ButtonSize = 'small' | 'medium' | 'large';
 export interface ButtonProps extends AkButtonProps {

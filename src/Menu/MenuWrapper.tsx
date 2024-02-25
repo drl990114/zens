@@ -1,9 +1,8 @@
 import { Menu as AkMenu } from '@ariakit/react'
-import { darken } from '@markflowy/theme'
-import type { IStyledComponent } from 'styled-components';
+import { darken } from '../Theme'
 import styled from 'styled-components'
 
-export const MenuWrapper: IStyledComponent<'web', typeof AkMenu> = styled(AkMenu)`
+export const MenuWrapper = styled(AkMenu)`
   position: relative;
   display: flex;
   min-width: 130px;
@@ -49,13 +48,13 @@ export const MenuWrapper: IStyledComponent<'web', typeof AkMenu> = styled(AkMenu
   }
 
   .menu-item[data-active-item] {
-    background-color: ${(props) => props.theme.blue};
+    background-color: ${(props) => props.theme.contextMenuBgColorHover};
     color: hsl(204 20% 100%);
   }
 
   .menu-item:active,
   .menu-item[data-active] {
-    background-color: ${(props) => darken(props.theme.blue, 0.2)};
+    background-color: ${(props) => darken(props.theme.contextMenuBgColorHover, 0.2)};
   }
 
   .menu-label {

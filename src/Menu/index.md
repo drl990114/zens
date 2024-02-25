@@ -1,5 +1,5 @@
 ---
-title: Button 按钮
+title: Menu 菜单
 nav:
   title: 组件
   order: 2
@@ -8,9 +8,7 @@ group:
   order: 1
 ---
 
-# Button 按钮
-
-按钮。
+#  Menu 菜单
 
 ### 基本用法
 
