@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run build:types && gulp",
-    "build:site": "dumi build",
+    "build:site": "cross-env NODE_ENV=production dumi build",
     "build:types": "tsc -p tsconfig.build.json && cpr lib esm",
     "clean": "rimraf lib esm dist .dumi/tmp doc-site",
     "commit": "cz",
