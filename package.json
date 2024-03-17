@@ -138,7 +138,7 @@
     "react-dom": "^18.2.0",
     "react-spinners": "^0.13.8",
     "rimraf": "^3.0.2",
-    "snapshot-diff": "^0.6.1",
+    "snapshot-diff": "^0.10.0",
     "style-loader": "^3.3.0",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
