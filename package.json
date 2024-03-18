@@ -127,7 +127,7 @@
     "jest-environment-jsdom": "29.4.3",
     "jest-transform-css": "6.0.1",
     "less": "^3.10.3",
-    "lint-staged": "13.1.2",
+    "lint-staged": "15.2.2",
     "np": "^7.5.0",
     "plop": "^2",
     "postcss": "8.4.21",
