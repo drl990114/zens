@@ -1,6 +1,7 @@
 import type { MenuProps as AkMenuProps } from '@ariakit/react';
 import { MenuButton, MenuButtonArrow, MenuItem, MenuProvider, useMenuStore } from '@ariakit/react';
 import { MenuWrapper } from './MenuWrapper';
+import Button from '../Button';
 
 export { useMenuStore };
 
@@ -67,7 +68,7 @@ const Menu = (props: MenuProps) => {
 
   return (
     <MenuProvider>
-      {children ? <MenuButton className={triggerBtnClass}>{children}</MenuButton> : null}
+      {children ? <MenuButton render={p => <Button {...p} />} className={triggerBtnClass}>{children}</MenuButton> : null}
       <MenuWrapper style={style} open={open} {...rest}>
         {renderItems(items)}
       </MenuWrapper>

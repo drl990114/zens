@@ -69,7 +69,11 @@ const Button: IStyledComponent<'web', ButtonProps> = styled(AkButton).attrs<Butt
   }
 
   &[aria-expanded='true'] {
-    background-color: hsl(204 20% 96%);
+    background-color: ${(props) =>
+      darken(
+        props.btnType === 'primary' ? props.theme.accentColor : props.theme.buttonBgColor,
+        0.1,
+      )};
   }
 
   &[data-focus-visible] {
