@@ -128,7 +128,7 @@
     "jest-transform-css": "6.0.1",
     "less": "^3.10.3",
     "lint-staged": "15.2.2",
-    "np": "^7.5.0",
+    "np": "^10.0.1",
     "plop": "^2",
     "postcss": "8.4.21",
     "prettier": "2.8.8",
