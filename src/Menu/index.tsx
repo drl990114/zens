@@ -1,8 +1,10 @@
 import type { MenuProps as AkMenuProps } from '@ariakit/react';
-import { MenuButton, MenuButtonArrow, MenuItem, MenuProvider, useMenuStore } from '@ariakit/react';
-import { MenuWrapper } from './MenuWrapper';
+import { MenuButton, MenuButtonArrow, MenuProvider, useMenuStore } from '@ariakit/react';
 import Button from '../Button';
+import { MenuItem, MenuWrapper } from './styles';
 
+export { MenuProvider } from '@ariakit/react';
+export * from './styles';
 export { useMenuStore };
 
 export type MenuItemData = {
@@ -15,12 +17,22 @@ export type MenuItemData = {
 };
 
 interface MenuProps extends AkMenuProps {
+  menuButtonProps?: React.ComponentProps<typeof Button>;
   triggerBtnClass?: string;
   items: MenuItemData[];
 }
 
 const Menu = (props: MenuProps) => {
-  const { open, items, triggerBtnClass, store, style, children, ...rest } = props;
+  const {
+    open,
+    items,
+    triggerBtnClass,
+    store,
+    style,
+    children,
+    menuButtonProps = {},
+    ...rest
+  } = props;
 
   const renderItems = (menuItems: MenuItemData[]) => {
     return menuItems.map((item) => {
@@ -29,7 +41,7 @@ const Menu = (props: MenuProps) => {
       if (item.children && item.children?.length > 0) {
         return (
           <MenuProvider key={key}>
-            <MenuItem className="menu-item" render={<MenuButton />}>
+            <MenuItem render={<MenuButton />}>
               <div className="menu-item__checkicon" />
               <span className="menu-label">{item.label}</span>
               <MenuButtonArrow />
@@ -41,7 +53,6 @@ const Menu = (props: MenuProps) => {
         return (
           <MenuItem
             key={key}
-            className="menu-item"
             onClick={() => {
               if (item.handler) {
                 item.handler();
@@ -68,7 +79,14 @@ const Menu = (props: MenuProps) => {
 
   return (
     <MenuProvider>
-      {children ? <MenuButton render={p => <Button {...p} />} className={triggerBtnClass}>{children}</MenuButton> : null}
+      {children ? (
+        <MenuButton
+          render={(p) => <Button {...p} {...menuButtonProps} />}
+          className={triggerBtnClass}
+        >
+          {children}
+        </MenuButton>
+      ) : null}
       <MenuWrapper style={style} open={open} {...rest}>
         {renderItems(items)}
       </MenuWrapper>
