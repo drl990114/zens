@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkzens=self.webpackChunkzens||[]).push([[31],{35015:function(e,n,u){u.r(n);var t=u(78328),s=u(85893);n.default=function(){return(0,s.jsx)(t.Tooltip,{title:"\u8FD9\u662F\u4E00\u4E2A\u63D0\u793A",children:(0,s.jsx)(t.Button,{children:"\u6309\u94AE"})})}}}]);
