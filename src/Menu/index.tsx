@@ -1,7 +1,7 @@
 import type { MenuProps as AkMenuProps } from '@ariakit/react';
 import { MenuButton, MenuButtonArrow, MenuProvider, useMenuStore } from '@ariakit/react';
 import Button from '../Button';
-import { MenuItem, MenuWrapper } from './styles';
+import { MenuItem, MenuItemCheckIcon, MenuWrapper } from './styles';
 
 export { MenuProvider } from '@ariakit/react';
 export * from './styles';
@@ -42,7 +42,7 @@ const Menu = (props: MenuProps) => {
         return (
           <MenuProvider key={key}>
             <MenuItem render={<MenuButton />}>
-              <div className="menu-item__checkicon" />
+              <MenuItemCheckIcon />
               <span className="menu-label">{item.label}</span>
               <MenuButtonArrow />
             </MenuItem>
@@ -59,9 +59,9 @@ const Menu = (props: MenuProps) => {
               }
             }}
           >
-            <div className="menu-item__checkicon">
+            <MenuItemCheckIcon>
               {item.checked ? <i className="ri-check-line" /> : null}
-            </div>
+            </MenuItemCheckIcon>
             <span className="menu-label">{item.label}</span>
           </MenuItem>
         );

@@ -1,6 +1,6 @@
 import * as Ariakit from '@ariakit/react';
-import { darken } from '../Theme';
 import styled from 'styled-components';
+import { darken } from '../Theme';
 
 export const MenuItem = styled(Ariakit.MenuItem)`
   display: flex;
@@ -9,12 +9,6 @@ export const MenuItem = styled(Ariakit.MenuItem)`
   border-radius: ${(props) => props.theme.smallBorderRadius};
   padding: ${(props) => props.theme.spaceXs};
   outline: none !important;
-
-  &__checkicon {
-    width: 14px;
-    font-weight: bold;
-    line-height: 14px;
-  }
 
   &[aria-disabled='true'] {
     opacity: 0.25;
@@ -29,6 +23,12 @@ export const MenuItem = styled(Ariakit.MenuItem)`
   &[data-active] {
     background-color: ${(props) => darken(props.theme.contextMenuBgColorHover, 0.2)};
   }
+`;
+
+export const MenuItemCheckIcon = styled.div`
+  width: 14px;
+  font-weight: bold;
+  line-height: 14px;
 `;
 
 export const MenuWrapper = styled(Ariakit.Menu)`
@@ -49,16 +49,15 @@ export const MenuWrapper = styled(Ariakit.Menu)`
   overflow: visible;
 
   .separator {
+    width: 100%;
+    height: 0px;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    height: 0px;
-    width: 100%;
-    border-top-width: 1px;
     border-color: ${(props) => props.theme.borderColor};
+    border-top-width: 1px;
   }
 
   .menu-label {
     flex: 1 1 0%;
   }
-`
-
+`;
