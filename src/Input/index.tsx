@@ -1,5 +1,5 @@
-import { forwardRef, useEffect, useRef } from 'react'
-import styled from 'styled-components'
+import { KeyboardEventHandler, useRef } from 'react';
+import styled from 'styled-components';
 
 const InputComponent = styled.input`
   line-height: 22px;
@@ -18,30 +18,23 @@ const InputComponent = styled.input`
     background-color: ${(props) => props.theme.tipsBgColor};
     cursor: not-allowed;
   }
-`
+`;
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  onPressEnter?: (e: KeyboardEvent) => void
+  inputRef?: React.Ref<HTMLInputElement>;
+  onPressEnter?: (e: KeyboardEvent) => void;
 }
 
-const Input: React.FC<InputProps> = forwardRef((props) => {
-  const { onPressEnter, ...rest } = props
-  const inputRef = useRef<HTMLInputElement>(null)
+const Input: React.FC<InputProps> = (props, ref) => {
+  const { inputRef, onPressEnter, ...rest } = props;
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        onPressEnter?.(e)
-      }
+  const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === 'Enter') {
+      onPressEnter?.(e.nativeEvent);
     }
-    inputRef.current?.addEventListener('keydown', handleKeyDown)
+  };
 
-    return () => {
-      inputRef.current?.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [onPressEnter])
+  return <InputComponent ref={inputRef} {...rest} onKeyDown={handleKeyDown} />;
+};
 
-  return <InputComponent ref={inputRef} {...rest} />
-})
-
-export default Input
+export default Input;
