@@ -60,6 +60,7 @@
   "dependencies": {
     "@ariakit/react": "^0.4.3",
     "@babel/runtime": "^7",
+    "@emotion/is-prop-valid": "^1.2.2",
     "@floating-ui/dom": "^1.0.0",
     "classnames": "^2.3.0",
     "clsx": "^2.0.0",
