@@ -36,7 +36,9 @@ const Button: IStyledComponent<'web', ButtonProps> = styled(AkButton).attrs<Butt
   (props) => ({
     ...props,
   }),
-)`
+).withConfig({
+  shouldForwardProp: (propName: string) => propName !== 'btnType' && propName !== 'size',
+})`
   display: flex;
   user-select: none;
   align-items: center;

@@ -15,3 +15,7 @@ group:
 ### 基本用法
 
 <code src="./demo/basic.tsx"></code>
+
+### 按钮类型
+
+<code src="./demo/btnType.tsx"></code>
