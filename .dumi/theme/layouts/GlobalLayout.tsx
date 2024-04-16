@@ -1,5 +1,5 @@
 import { useOutlet, usePrefersColor } from 'dumi';
-import { ThemeProvider } from '../../../src';
+import { ThemeProvider, Notifications } from '../../../src';
 
 const GlobalLayout = () => {
   const [color] = usePrefersColor();
@@ -12,6 +12,7 @@ const GlobalLayout = () => {
       }}
     >
       {outlet}
+      <Notifications />
     </ThemeProvider>
   );
 };

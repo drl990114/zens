@@ -1,6 +1,6 @@
 {
   "name": "zens",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "description": "MarkFlowy's ui component library.",
   "keywords": [],
   "homepage": "https://github.com/drl990114/zens#readme",
@@ -68,7 +68,6 @@
     "rc-image": "^7.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.4.1",
     "react-spinners": "^0.13.8",
     "sonner": "^1.4.0",
     "styled-components": "^6.1.0",
