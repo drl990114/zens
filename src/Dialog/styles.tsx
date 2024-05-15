@@ -56,7 +56,6 @@ export const DialogWrapper = styled.div.attrs<{ width?: string }>((props) => ({
 
   .mf-dialog__main {
     flex: 1;
-    display: flex;
     overflow: auto;
   }
 

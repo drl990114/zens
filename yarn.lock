@@ -38,26 +38,26 @@
   resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.7.7.tgz#26ea493a831b4f3a85475e7157be02fb4eab51fb"
   integrity sha512-gFPqTG7otEJ8uP6wrhDv6mqwGWYZKNvAcCq6u9hOj0c+IKCEsY4L1oC9trPq2SaWIzAfHvqfBDxF591JkMf+kg==
 
-"@ariakit/core@0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@ariakit/core/-/core-0.4.4.tgz#ae50a452300f6e81607db5d3d814e18f73e1161e"
-  integrity sha512-ig/P1ymKaQU5MxtXRbeB5rHj87UhiwOViTtbpt2ey6v+NqWPG4+VY1RozT9xWI4dw5i+4Cf3vPd2Wgjv5whP9g==
+"@ariakit/core@0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@ariakit/core/-/core-0.4.5.tgz#ba42573474c1f54109cf96650e8614d7312a432d"
+  integrity sha512-e294+bEcyzt/H/kO4fS5/czLAlkF7PY+Kul3q2z54VY+GGay8NlVs9UezAB7L4jUBlYRAXwp7/1Sq3R7b+MZ7w==
 
-"@ariakit/react-core@0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@ariakit/react-core/-/react-core-0.4.4.tgz#24ce7471ea8b8cf9bd9c756f725949c42293f5e9"
-  integrity sha512-17adQvlRw/996/fmaHfsAiaYh8244BF8AgjZPVsTlxA9oXNunVzaEpmtgZ1XLdq1Tc10cIsZEsWup3vQ/6Ak0A==
+"@ariakit/react-core@0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@ariakit/react-core/-/react-core-0.4.5.tgz#dd0bda1d54d708ec803e658f9d298ea507c96b8a"
+  integrity sha512-ciTYPwpj/+mdA+EstveEnoygbx5e4PXQJxfkLKy4lkTkDJJUS9GcbYhdnIFJVUta6P1YFvzkIKo+/y9mcbMKJg==
   dependencies:
-    "@ariakit/core" "0.4.4"
+    "@ariakit/core" "0.4.5"
     "@floating-ui/dom" "^1.0.0"
     use-sync-external-store "^1.2.0"
 
-"@ariakit/react@^0.4.3":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@ariakit/react/-/react-0.4.4.tgz#078919e2b470176a7cc4c1bb54c02c140a952dd1"
-  integrity sha512-pqIPJFsrQrUkX8ogm2TVfudPO4RnRgd6X3y5g0QPXipL3L7RlR6MQptgLAq2FnDGMvTvQPFSlvBoza5YvQG3NQ==
+"@ariakit/react@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@ariakit/react/-/react-0.4.5.tgz#f6e356665cc45fa317c10fa041009acbb290d92f"
+  integrity sha512-GUHxaOY1JZrJUHkuV20IY4NWcgknhqTQM0qCQcVZDCi+pJiWchUjTG+UyIr/Of02hU569qnQ7yovskCf+V3tNg==
   dependencies:
-    "@ariakit/react-core" "0.4.4"
+    "@ariakit/react-core" "0.4.5"
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"

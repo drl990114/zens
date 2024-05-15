@@ -1,8 +1,12 @@
 // @ts-nocheck
-import type { PopoverProps as AkPopoverProps, PopoverProviderProps } from '@ariakit/react';
-import { PopoverDisclosure, PopoverProvider } from '@ariakit/react';
+import type { PopoverProps as AkPopoverProps, PopoverProviderProps, PopoverStore } from '@ariakit/react';
+import { PopoverDisclosure, PopoverProvider, usePopoverStore } from '@ariakit/react';
 import { Box } from '../Box';
 import { PopoverArrow, PopoverHeading, PopoverWrapper } from './styles';
+import { useEffect } from 'react';
+
+export type { PopoverStore } from '@ariakit/react';
+export { usePopoverStore } from '@ariakit/react';
 
 type PopoverOptions = Pick<PopoverProviderProps, 'placement' | 'open'> &
   Pick<AkPopoverProps, 'onClose'>;
@@ -14,6 +18,7 @@ interface PopoverProps extends BaseComponentProps, PopoverOptions {
   toggleOnClick?: boolean;
   placement?: PopoverProviderProps['placement'];
   children?: BaseComponentProps['children'];
+  onStoreChange?: (store: PopoverStore) => void;
 }
 
 const Popover: React.FC<PopoverProps> = (props) => {
@@ -24,24 +29,32 @@ const Popover: React.FC<PopoverProps> = (props) => {
     children,
     customContent,
     placement,
+    onStoreChange,
     ...rest
   } = props;
+  const store = usePopoverStore();
+
+  useEffect(() => {
+    if (onStoreChange) {
+      onStoreChange(store)
+    }
+  }, [store, onStoreChange])
 
   return (
-    <PopoverProvider placement={placement}>
+    <PopoverProvider store={store} placement={placement}>
       <PopoverDisclosure
         toggleOnClick={toggleOnClick}
         render={(p) => <Box style={{ display: 'inline-block' }} {...p} />}
       >
         {children}
       </PopoverDisclosure>
-      <PopoverWrapper render={<Box />} {...rest}>
-        {arrow ? (
-          <PopoverArrow />
-        ) : null}
-        {title ? <PopoverHeading>{title}</PopoverHeading> : null}
-        {customContent}
-      </PopoverWrapper>
+      {!customContent && !title ? null : (
+        <PopoverWrapper render={<Box />} {...rest}>
+          {arrow ? <PopoverArrow /> : null}
+          {title ? <PopoverHeading>{title}</PopoverHeading> : null}
+          {customContent}
+        </PopoverWrapper>
+      )}
     </PopoverProvider>
   );
 };

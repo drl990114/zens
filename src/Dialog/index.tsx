@@ -3,16 +3,18 @@ import { DialogDismiss, Dialog as AkDialog } from '@ariakit/react'
 import React from 'react'
 import { DialogWrapper, DialogBackdrop } from './styles'
 import Space from '../Space'
+import clsx from 'clsx'
 
 export interface DialogProps extends AkDialogProps {
   title?: string
   children?: React.ReactNode
   footer?: React.ReactNode
+  containerClass?: string
   width?: string
 }
 
 const Dialog = (props: DialogProps) => {
-  const { title, footer, children, width, ...rest } = props
+  const { title, footer, containerClass, children, width, ...rest } = props
 
   return (
     <AkDialog
@@ -30,7 +32,7 @@ const Dialog = (props: DialogProps) => {
           <DialogDismiss className="mf-dialog__dismiss" />
         </div>
       ) : null}
-      <div className="mf-dialog__main">{children}</div>
+      <div className={clsx("mf-dialog__main", containerClass)}>{children}</div>
       {footer ? <Space className="mf-dialog__footer">{footer}</Space> : null}
     </AkDialog>
   )

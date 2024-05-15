@@ -32,6 +32,7 @@ const Input: React.FC<InputProps> = (props, ref) => {
     if (e.key === 'Enter') {
       onPressEnter?.(e.nativeEvent);
     }
+    rest.onKeyDown?.(e);
   };
 
   return <InputComponent ref={inputRef} {...rest} onKeyDown={handleKeyDown} />;
