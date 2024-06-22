@@ -1,21 +1,21 @@
-import React, { forwardRef } from 'react'
-import * as Ariakit from '@ariakit/react'
-import { Box } from '../Box'
-import styled from 'styled-components'
-import * as S from './styles'
+import React from 'react';
+import styled from 'styled-components';
+import * as Ariakit from '@ariakit/react';
+import * as S from './styles';
+import { Box } from '../Box';
 
 export type TooltipOptions = {
-  children: React.ReactNode
-  title: BaseComponentProps['children']
-  fixed?: boolean
-} & Pick<Ariakit.TooltipStoreProps, 'placement'>
+  children: React.ReactNode;
+  title: BaseComponentProps['children'];
+  fixed?: boolean;
+} & Pick<Ariakit.TooltipStoreProps, 'placement'>;
 
 export interface TooltipProps
   extends BaseComponentProps,
     TooltipOptions,
     Ariakit.TooltipProviderProps {
-  title: string
-  children: BaseComponentProps['children']
+  title: string;
+  children: BaseComponentProps['children'];
 }
 
 const TooltipWrapper = styled.div`
@@ -31,28 +31,33 @@ const TooltipWrapper = styled.div`
   line-height: 1.25rem;
   color: ${(props) => props.theme.primaryFontColor};
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-`
+`;
 
-const Tooltip = forwardRef<any, TooltipProps>(
-  ({ children, title, fixed = false, placement = fixed ? 'top' : 'bottom', ...rest }, ref) => {
-    const child = (children as JSX.Element)?.props?.disabled
-      ? React.Children.only(<S.ChildItem>{children}</S.ChildItem>)
-      : children
+const Tooltip = ({
+  children,
+  title,
+  fixed = false,
+  placement = fixed ? 'top' : 'bottom',
+  open,
+  ...rest
+}: TooltipProps) => {
+  const child = (children as JSX.Element)?.props?.disabled
+    ? React.Children.only(<S.ChildItem>{children}</S.ChildItem>)
+    : children;
 
-    // If no content, simply return the children
-    if (!title) {
-      return children as React.ReactElement
-    }
+  // If no content, simply return the children
+  if (!title) {
+    return children as React.ReactElement;
+  }
 
-    return (
-      <Ariakit.TooltipProvider placement={placement}>
-        <Ariakit.TooltipAnchor render={child} />
-        <Ariakit.Tooltip ref={ref} render={<Box style={{ zIndex: 99 }} {...rest} />}>
-          <TooltipWrapper>{title}</TooltipWrapper>
-        </Ariakit.Tooltip>
-      </Ariakit.TooltipProvider>
-    )
-  },
-)
+  return (
+    <Ariakit.TooltipProvider placement={placement} open={open}>
+      <Ariakit.TooltipAnchor render={child} />
+      <Ariakit.Tooltip render={<Box style={{ zIndex: 99 }} {...rest} />}>
+        <TooltipWrapper>{title}</TooltipWrapper>
+      </Ariakit.Tooltip>
+    </Ariakit.TooltipProvider>
+  );
+};
 
-export default Tooltip
+export default Tooltip;

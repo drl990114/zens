@@ -17,5 +17,5 @@ export const styledLightTheme = {
   buttonBgColor: '#f6f7f9',
   tooltipBgColor: '#d7d7dc',
   dialogBgColor: '#f6f7f9',
-  dialogBackdropColor: 'rgba(220, 220, 220, 0.4)',
+  dialogBackdropColor: '#00000066',
 }

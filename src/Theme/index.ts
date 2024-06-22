@@ -22,7 +22,7 @@ export const common = {
   fontH6: '18px',
   fontBase: '15px',
   fontSm: '14px',
-  fontXs: '12px',
+  fontXs: '13px',
 
   spaceXs: '4px',
   spaceSm: '8px',

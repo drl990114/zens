@@ -1,6 +1,6 @@
 {
   "name": "zens",
-  "version": "0.0.22",
+  "version": "0.0.25",
   "description": "MarkFlowy's ui component library.",
   "keywords": [],
   "homepage": "https://github.com/drl990114/zens#readme",
@@ -58,6 +58,7 @@
     }
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
     "@ariakit/react": "^0.4.5",
     "@babel/runtime": "^7",
     "@emotion/is-prop-valid": "^1.2.2",
@@ -70,7 +71,7 @@
     "react-dom": "^18.2.0",
     "react-spinners": "^0.13.8",
     "sonner": "^1.4.0",
-    "styled-components": "^6.1.0",
+    "styled-components": "^6.1.11",
     "stylis": "^4.0.0"
   },
   "devDependencies": {

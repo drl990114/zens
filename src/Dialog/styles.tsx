@@ -15,12 +15,13 @@ export const DialogWrapper = styled.div.attrs<{ width?: string }>((props) => ({
   max-height: calc(100vh - 2 * 0.75rem);
   flex-direction: column;
   overflow: auto;
-  border-radius: ${(props) => props.theme.smallBorderRadius};
+  border-radius: ${(props) => props.theme.midBorderRadius};
   font-size: 14px;
   background-color: ${(props) => props.theme.dialogBgColor};
   color: ${(props) => props.theme.primaryFontColor};
   padding: 1rem;
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  border: 1px solid ${(props) => props.theme.borderColor};
 
   .mf-dialog__heading {
     display: flex;

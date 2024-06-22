@@ -9,6 +9,7 @@ export const MenuItem = styled(Ariakit.MenuItem)`
   border-radius: ${(props) => props.theme.smallBorderRadius};
   padding: ${(props) => props.theme.spaceXs};
   outline: none !important;
+  line-height: 20px;
 
   &[aria-disabled='true'] {
     opacity: 0.25;

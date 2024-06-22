@@ -8,7 +8,7 @@ export { default as Menu } from './Menu'
 export { default as Image } from './Image'
 
 export * from './Theme'
-export * from './Spinner'
+export * from './Loading'
 export * from './Tooltip'
 export * from './Menu'
 export * from './Toast'
@@ -16,3 +16,5 @@ export * from './TableOfContent'
 export * from './Popover'
 
 export * from 'react-spinners'
+
+export * from '@ant-design/icons'
