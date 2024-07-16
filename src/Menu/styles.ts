@@ -16,7 +16,6 @@ export const MenuItem = styled(Ariakit.MenuItem)`
   }
 
   &[data-active-item] {
-    color: hsl(204 20% 100%);
     background-color: ${(props) => props.theme.contextMenuBgColorHover};
   }
 

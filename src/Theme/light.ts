@@ -12,8 +12,8 @@ export const styledLightTheme = {
   boxShadowColor: 'rgba(0, 0, 0, 0.08)',
 
   // components
-  contextMenuBgColor: '#f6f7f9',
-  contextMenuBgColorHover: '#1552B3',
+  contextMenuBgColor: '#FFFFFF',
+  contextMenuBgColorHover: '#E8E8EC',
   buttonBgColor: '#f6f7f9',
   tooltipBgColor: '#d7d7dc',
   dialogBgColor: '#f6f7f9',
