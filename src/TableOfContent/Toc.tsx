@@ -187,6 +187,8 @@ export const Toc = memo(
       refreshByHeadings: ({ newHeadings }) => {
         setHeadings(newHeadings);
         setHeadingTree(new HeadingTree(newHeadings));
+        setScroll(undefined)
+        setContainer(undefined)
       },
     }));
 
