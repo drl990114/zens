@@ -18,4 +18,6 @@ export const styledLightTheme = {
   tooltipBgColor: '#d7d7dc',
   dialogBgColor: '#f6f7f9',
   dialogBackdropColor: '#00000066',
-}
+
+  errorTipColor: '#5f5f5f',
+};

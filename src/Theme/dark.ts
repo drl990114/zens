@@ -18,4 +18,6 @@ export const styledDarkTheme = {
   tooltipBgColor: '#43414A',
   dialogBgColor: '#151515',
   dialogBackdropColor: '#00000099',
+
+  errorTipColor: '#5f5f5f',
 }
