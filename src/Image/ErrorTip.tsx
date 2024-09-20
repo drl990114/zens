@@ -1,6 +1,3 @@
-import type { PropsWithChildren } from 'react';
-import React from 'react';
-
 import styled from 'styled-components';
 
 const ErrorTipContainer = styled.div`
@@ -11,8 +8,8 @@ const ErrorTipContainer = styled.div`
   color: ${props => props.theme.errorTipColor};
 
   .zens-error-icon-box {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 
   .zens-error-icon {
@@ -34,7 +31,7 @@ export interface ErrorTipProps {
   width?: number;
 }
 export const ErrorTip = (props: ErrorTipProps) => {
-  const { errortip, width = 100, height = 60 } = props;
+  const { errortip, width = 100, height = 70 } = props;
 
   return (
     <ErrorTipContainer style={{ width: `${width}px`, height: `${height}px` }}>
@@ -42,7 +39,7 @@ export const ErrorTip = (props: ErrorTipProps) => {
         <svg
           fill="none"
           stroke="currentColor"
-          stroke-width="4"
+          strokeWidth="4"
           viewBox="0 0 48 48"
           aria-hidden="true"
           focusable="false"
@@ -57,10 +54,10 @@ export const ErrorTip = (props: ErrorTipProps) => {
           ></path>
           <path
             fill="currentColor"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             stroke="none"
             d="M46 38a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-4.95-4.782 1.74 1.74-3.045 3.046 3.046 3.046-1.74 1.74-3.047-3.045-3.046 3.046-1.74-1.74 3.046-3.047-3.046-3.046 1.74-1.74 3.046 3.046 3.046-3.046Z"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           ></path>
           <path d="M17 15h-2v2h2v-2Z"></path>
         </svg>

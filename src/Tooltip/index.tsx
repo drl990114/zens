@@ -53,7 +53,7 @@ const Tooltip = ({
   return (
     <Ariakit.TooltipProvider placement={placement} open={open}>
       <Ariakit.TooltipAnchor render={child} />
-      <Ariakit.Tooltip render={<Box style={{ zIndex: 99 }} {...rest} />}>
+      <Ariakit.Tooltip render={p => <Box style={{ zIndex: 99 }} {...p} {...rest} />}>
         <TooltipWrapper>{title}</TooltipWrapper>
       </Ariakit.Tooltip>
     </Ariakit.TooltipProvider>

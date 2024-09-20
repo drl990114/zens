@@ -49,7 +49,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
         {children}
       </PopoverDisclosure>
       {!customContent && !title ? null : (
-        <PopoverWrapper render={<Box />} {...rest}>
+        <PopoverWrapper render={(p) => <Box {...p} />} {...rest}>
           {arrow ? <PopoverArrow /> : null}
           {title ? <PopoverHeading>{title}</PopoverHeading> : null}
           {customContent}

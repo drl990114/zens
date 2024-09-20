@@ -38,7 +38,20 @@ function compileScripts(babelEnv, destDir) {
   process.env.BABEL_ENV = babelEnv;
   return gulp
     .src(scripts)
-    .pipe(babel()) // 使用gulp-babel处理
+    .pipe(
+      babel({
+        plugins: [
+          [
+            require.resolve('babel-plugin-module-resolver'),
+            {
+              alias: {
+                '@': './src',
+              },
+            },
+          ],
+        ],
+      }),
+    ) // 使用gulp-babel处理
     .pipe(
       through2.obj(function z(file, encoding, next) {
         this.push(file.clone());
