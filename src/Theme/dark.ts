@@ -14,6 +14,7 @@ export const styledDarkTheme = {
   // components
   contextMenuBgColor: '#18191B',
   contextMenuBgColorHover: '#2D3134',
+  contextMenuSeparatorColor: '#919191',
   buttonBgColor: '#21262c',
   tooltipBgColor: '#43414A',
   dialogBgColor: '#151515',

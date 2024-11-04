@@ -14,6 +14,7 @@ export const styledLightTheme = {
   // components
   contextMenuBgColor: '#FFFFFF',
   contextMenuBgColorHover: '#E8E8EC',
+  contextMenuSeparatorColor: '#ffffff66',
   buttonBgColor: '#f6f7f9',
   tooltipBgColor: '#d7d7dc',
   dialogBgColor: '#f6f7f9',
