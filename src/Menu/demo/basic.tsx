@@ -1,7 +1,7 @@
-import { Menu } from 'zens';
+import { Menu, MenuItemData } from 'zens';
 
 export default () => {
-  const menuData = [
+  const menuData: MenuItemData[] = [
     {
       label: 'menu1',
       value: 'menu1',
@@ -9,6 +9,9 @@ export default () => {
       handler: () => {
         console.log('menu1');
       },
+    },
+    {
+      type: 'divider',
     },
     {
       label: 'menu2',

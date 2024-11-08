@@ -17,4 +17,8 @@ export * from './Popover'
 
 export * from 'react-spinners'
 
-export * from '@ant-design/icons'
+import * as Icon from '@ant-design/icons'
+import * as AriaKit from '@ariakit/react'
+
+export { AriaKit }
+export { Icon }

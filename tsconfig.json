@@ -15,7 +15,8 @@
     "skipLibCheck": true,
     "paths": {
       "zens": ["src/index.ts"],
-      "@@/*": [".dumi/tmp/*"]
+      "@@/*": [".dumi/tmp/*"],
+      "@/*": ["src/*"]
     }
   },
   "include": [

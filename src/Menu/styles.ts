@@ -1,5 +1,7 @@
-import * as Ariakit from '@ariakit/react';
 import styled from 'styled-components';
+
+import * as Ariakit from '@ariakit/react';
+
 import { darken } from '../Theme';
 
 export const MenuItem = styled(Ariakit.MenuItem)`
@@ -48,16 +50,21 @@ export const MenuWrapper = styled(Ariakit.Menu)`
   outline: none;
   overflow: visible;
 
-  .separator {
-    width: 100%;
-    height: 0px;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-color: ${(props) => props.theme.borderColor};
-    border-top-width: 1px;
-  }
-
   .menu-label {
     flex: 1 1 0%;
   }
+`;
+
+export const MenuSeparator = styled(Ariakit.MenuSeparator)`
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 0px;
+  width: 100%;
+  background-color: ${(props) => props.theme.contextMenuBgColor};
+  border-top-width: 1px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  border-color: ${(props) => props.theme.contextMenuSeparatorColor};
+  color: ${(props) => props.theme.contextMenuSeparatorColor};
 `;

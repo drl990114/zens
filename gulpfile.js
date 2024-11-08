@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const less = require('gulp-less');
-const autoprefixer = require('gulp-autoprefixer');
 const cssnano = require('gulp-cssnano');
 const through2 = require('through2');
 
@@ -38,7 +37,20 @@ function compileScripts(babelEnv, destDir) {
   process.env.BABEL_ENV = babelEnv;
   return gulp
     .src(scripts)
-    .pipe(babel()) // 使用gulp-babel处理
+    .pipe(
+      babel({
+        plugins: [
+          [
+            require.resolve('babel-plugin-module-resolver'),
+            {
+              alias: {
+                '@': './src',
+              },
+            },
+          ],
+        ],
+      }),
+    ) // 使用gulp-babel处理
     .pipe(
       through2.obj(function z(file, encoding, next) {
         this.push(file.clone());
@@ -89,7 +101,6 @@ function less2css() {
   return gulp
     .src(paths.styles)
     .pipe(less()) // 处理less文件
-    .pipe(autoprefixer()) // 根据browserslistrc增加前缀
     .pipe(cssnano({ zindex: false, reduceIdents: false })) // 压缩
     .pipe(gulp.dest(paths.dest.lib))
     .pipe(gulp.dest(paths.dest.esm));
