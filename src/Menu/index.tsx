@@ -1,7 +1,7 @@
 import type { MenuProps as AkMenuProps } from '@ariakit/react';
 import { MenuButton, MenuButtonArrow, MenuProvider, useMenuStore } from '@ariakit/react';
 
-import { MenuItem, MenuItemCheckIcon, MenuWrapper, MenuSeparator } from './styles';
+import { MenuItem, MenuItemCheckIcon, MenuSeparator, MenuWrapper } from './styles';
 
 import Button from '../Button';
 
@@ -32,7 +32,7 @@ interface MenuProps extends AkMenuProps {
 
 export const isDivider = (item: MenuItemData): item is MenuDividerType => {
   return (item as MenuDividerType)?.type === 'divider';
-}
+};
 
 const Menu = (props: MenuProps) => {
   const {
@@ -47,9 +47,9 @@ const Menu = (props: MenuProps) => {
   } = props;
 
   const renderItems = (menuItems: MenuItemData[]) => {
-    return menuItems.map((item) => {
+    return menuItems.map((item, index) => {
       if (isDivider(item)) {
-        return <MenuSeparator />
+        return <MenuSeparator key={index} />;
       }
 
       const key = item.value;

@@ -3,7 +3,7 @@ import type { PopoverProps as AkPopoverProps, PopoverProviderProps, PopoverStore
 import { PopoverDisclosure, PopoverProvider, usePopoverStore } from '@ariakit/react';
 import { Box } from '../Box';
 import { PopoverArrow, PopoverHeading, PopoverWrapper } from './styles';
-import { useEffect } from 'react';
+import { HTMLAttributes, useEffect } from 'react';
 
 export type { PopoverStore } from '@ariakit/react';
 export { usePopoverStore } from '@ariakit/react';
@@ -12,6 +12,7 @@ type PopoverOptions = Pick<PopoverProviderProps, 'placement' | 'open'> &
   Pick<AkPopoverProps, 'onClose'>;
 
 interface PopoverProps extends BaseComponentProps, PopoverOptions {
+  boxProps?: HTMLAttributes<HTMLDivElement>;
   arrow?: boolean;
   title?: string;
   customContent?: React.ReactNode;
@@ -30,6 +31,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
     customContent,
     placement,
     onStoreChange,
+    boxProps = {},
     ...rest
   } = props;
   const store = usePopoverStore();
@@ -44,7 +46,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
     <PopoverProvider store={store} placement={placement}>
       <PopoverDisclosure
         toggleOnClick={toggleOnClick}
-        render={(p) => <Box style={{ display: 'inline-block' }} {...p} />}
+        render={(p) => <Box style={{ display: 'inline-block' }} {...p} {...boxProps}/>}
       >
         {children}
       </PopoverDisclosure>
