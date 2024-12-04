@@ -3,7 +3,7 @@ import { Popover } from 'zens';
 export default () => {
 
   return (
-    <Popover title='Popover'>
+    <Popover title='Popover' fixed>
       actions
     </Popover>
   );

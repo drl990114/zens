@@ -9,7 +9,7 @@ export type { PopoverStore } from '@ariakit/react';
 export { usePopoverStore } from '@ariakit/react';
 
 type PopoverOptions = Pick<PopoverProviderProps, 'placement' | 'open'> &
-  Pick<AkPopoverProps, 'onClose'>;
+  Partial<AkPopoverProps>;
 
 interface PopoverProps extends BaseComponentProps, PopoverOptions {
   boxProps?: HTMLAttributes<HTMLDivElement>;
