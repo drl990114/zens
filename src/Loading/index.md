@@ -1,5 +1,5 @@
 ---
-title: Spinner 加载中
+title: Loading 加载中
 nav:
   title: 组件
   order: 2
@@ -8,7 +8,7 @@ group:
   order: 1
 ---
 
-# Spinner 加载中
+# Loading 加载中
 
 ### 基本用法
 
