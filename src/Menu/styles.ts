@@ -53,6 +53,12 @@ export const MenuWrapper = styled(Ariakit.Menu)`
   .menu-label {
     flex: 1 1 0%;
   }
+
+  .menu-shortcut {
+    margin-left: ${(props) => props.theme.spaceXs};
+    color: ${(props) => props.theme.secondaryFontColor};
+    font-size: ${(props) => props.theme.fontXs};
+  }
 `;
 
 export const MenuSeparator = styled(Ariakit.MenuSeparator)`

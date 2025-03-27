@@ -3,33 +3,45 @@ import { Menu, MenuItemData } from 'zens';
 export default () => {
   const menuData: MenuItemData[] = [
     {
-      label: 'menu1',
-      value: 'menu1',
-      checked: true,
+      label: '复制',
+      value: 'copy',
+      shortcut: '⌘C',
       handler: () => {
-        console.log('menu1');
+        console.log('复制');
+      },
+    },
+    {
+      label: '粘贴',
+      value: 'paste',
+      shortcut: '⌘V',
+      handler: () => {
+        console.log('粘贴');
       },
     },
     {
       type: 'divider',
     },
     {
-      label: 'menu2',
-      value: 'menu2',
+      label: '编辑',
+      value: 'edit',
+      shortcut: '⌘E',
       children: [
         {
-          label: 'menu2-1',
-          value: 'menu2-1',
+          label: '撤销',
+          value: 'undo',
+          shortcut: '⌘Z',
         },
         {
-          label: 'menu2-2',
-          value: 'menu2-2',
+          label: '重做',
+          value: 'redo',
+          shortcut: '⇧⌘Z',
         },
       ],
     },
     {
-      label: 'menu3',
-      value: 'menu3',
+      label: '查找',
+      value: 'find',
+      shortcut: '⌘F',
     }
   ];
 

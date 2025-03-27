@@ -13,7 +13,7 @@ export type MenuItemData = MenuGroupType | MenuDividerType;
 
 export type MenuGroupType = {
   label: string;
-  keybinding?: string;
+  shortcut?: string;
   value: string;
   checked?: boolean;
   handler?: () => void;
@@ -60,6 +60,7 @@ const Menu = (props: MenuProps) => {
             <MenuItem render={<MenuButton />}>
               <MenuItemCheckIcon />
               <span className="menu-label">{item.label}</span>
+              {item.shortcut && <span className="menu-shortcut">{item.shortcut}</span>}
               <MenuButtonArrow />
             </MenuItem>
             <MenuWrapper>{renderItems(item.children)}</MenuWrapper>
@@ -79,6 +80,7 @@ const Menu = (props: MenuProps) => {
               {item.checked ? <i className="ri-check-line" /> : null}
             </MenuItemCheckIcon>
             <span className="menu-label">{item.label}</span>
+            {item.shortcut && <span className="menu-shortcut">{item.shortcut}</span>}
           </MenuItem>
         );
       }
