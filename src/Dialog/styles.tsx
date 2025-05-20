@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
-export const DialogWrapper = styled.div.attrs<{ width?: string }>((props) => ({
+export const DialogWrapper = styled.div.attrs<{ width?: string, padding?: string }>((props) => ({
   ...props,
   width: props.width || `420px`,
+  padding: props.padding || `4px 6px`,
 }))`
   position: fixed;
   top: 50%;
@@ -15,11 +16,11 @@ export const DialogWrapper = styled.div.attrs<{ width?: string }>((props) => ({
   max-height: calc(100vh - 2 * 0.75rem);
   flex-direction: column;
   overflow: auto;
-  border-radius: ${(props) => props.theme.midBorderRadius};
+  border-radius: ${(props) => props.theme.smallBorderRadius};
   font-size: 14px;
   background-color: ${(props) => props.theme.dialogBgColor};
   color: ${(props) => props.theme.primaryFontColor};
-  padding: 1rem;
+  padding: ${(props) => props.padding};
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   border: 1px solid ${(props) => props.theme.borderColor};
 

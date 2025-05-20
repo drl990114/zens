@@ -1,20 +1,25 @@
-import type { DialogProps as AkDialogProps } from '@ariakit/react'
-import { DialogDismiss, Dialog as AkDialog } from '@ariakit/react'
-import React from 'react'
-import { DialogWrapper, DialogBackdrop } from './styles'
-import Space from '../Space'
-import clsx from 'clsx'
+import React from 'react';
+
+import clsx from 'clsx';
+
+import type { DialogProps as AkDialogProps } from '@ariakit/react';
+import { Dialog as AkDialog, DialogDismiss } from '@ariakit/react';
+
+import { DialogBackdrop, DialogWrapper } from './styles';
+
+import Space from '../Space';
 
 export interface DialogProps extends AkDialogProps {
-  title?: string
-  children?: React.ReactNode
-  footer?: React.ReactNode
-  containerClass?: string
-  width?: string
+  title?: string;
+  hideDismiss?: boolean;
+  children?: React.ReactNode;
+  footer?: React.ReactNode;
+  containerClass?: string;
+  width?: string;
 }
 
 const Dialog = (props: DialogProps) => {
-  const { title, footer, containerClass, children, width, ...rest } = props
+  const { title, footer, containerClass, children, width, hideDismiss = false, ...rest } = props;
 
   return (
     <AkDialog
@@ -29,13 +34,15 @@ const Dialog = (props: DialogProps) => {
       {title ? (
         <div className="mf-dialog__heading">
           <div className="mf-dialog__heading__title">{title}</div>
-          <DialogDismiss className="mf-dialog__dismiss" />
+          {hideDismiss ? null : <DialogDismiss className="mf-dialog__dismiss" />}
         </div>
-      ) : null}
-      <div className={clsx("mf-dialog__main", containerClass)}>{children}</div>
+      ) : hideDismiss ? null : (
+        <DialogDismiss className="mf-dialog__dismiss" />
+      )}
+      <div className={clsx('mf-dialog__main', containerClass)}>{children}</div>
       {footer ? <Space className="mf-dialog__footer">{footer}</Space> : null}
     </AkDialog>
-  )
-}
+  );
+};
 
-export default Dialog
+export default Dialog;
