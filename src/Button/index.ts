@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import type { ButtonProps as AkButtonProps } from '@ariakit/react';
 import { Button as AkButton } from '@ariakit/react';
+
 import { darken } from '../Theme';
 
 type ButtonSize = 'small' | 'medium' | 'large';
@@ -32,13 +33,18 @@ const sizeSpaceMap: Record<
   },
 };
 
-const Button: IStyledComponent<'web', ButtonProps> = styled(AkButton).attrs<ButtonProps>(
-  (props) => ({
+const defaultProps: ButtonProps = {
+  size: 'medium',
+};
+
+const Button: IStyledComponent<'web', ButtonProps> = styled(AkButton)
+  .attrs<ButtonProps>((props) => ({
+    ...defaultProps,
     ...props,
-  }),
-).withConfig({
-  shouldForwardProp: (propName: string) => propName !== 'btnType' && propName !== 'size',
-})`
+  }))
+  .withConfig({
+    shouldForwardProp: (propName: string) => propName !== 'btnType' && propName !== 'size',
+  })`
   display: flex;
   user-select: none;
   align-items: center;
@@ -82,9 +88,5 @@ const Button: IStyledComponent<'web', ButtonProps> = styled(AkButton).attrs<Butt
     outline-style: solid;
   }
 `;
-
-Button.defaultProps = {
-  size: 'medium',
-}
 
 export default Button;
