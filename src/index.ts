@@ -15,6 +15,7 @@ export { default as Tooltip } from './Tooltip';
 export * from './Loading';
 export * from './Menu';
 export * from './Popover';
+export * from './Space';
 export * from './TableOfContent';
 export * from './Theme';
 export * from './Toast';

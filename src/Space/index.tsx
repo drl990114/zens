@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react'
 
-type SpaceSize = 'small' | 'middle' | 'large' | number
-type SpaceAlign = 'start' | 'end' | 'center' | 'baseline'
-type SpaceDirection = 'horizontal' | 'vertical'
+export type SpaceSize = 'small' | 'middle' | 'large' | number
+export type SpaceAlign = 'start' | 'end' | 'center' | 'baseline'
+export type SpaceDirection = 'horizontal' | 'vertical'
 
 interface SpaceProps extends BaseComponentProps {
   /**
