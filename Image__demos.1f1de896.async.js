@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkzens=self.webpackChunkzens||[]).push([[682],{92092:function(r,s,e){e.r(s);var t=e(31081),n=e(85893);s.default=function(){var a=function(){alert("You pressed enter!")};return(0,n.jsx)(t.Image,{width:300,height:200,src:"https://app.requestly.io/delay/5000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpe"})}}}]);

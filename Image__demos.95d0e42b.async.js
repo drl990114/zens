@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkzens=self.webpackChunkzens||[]).push([[682],{92092:function(u,s,e){e.r(s);var n=e(31081),t=e(85893);s.default=function(){var r=function(){alert("You pressed enter!")};return(0,t.jsx)(n.Image,{width:300,height:200,src:"https://picsum.photos/300/200"})}}}]);
