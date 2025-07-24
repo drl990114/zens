@@ -56,7 +56,7 @@ export default () => {
 
 export default () => {
   return (
-    <div style={{ padding: '16px', background: '#1f2225' }}>
+    <div style={{ padding: '16px' }}>
       <Space>
         <Button ghost>\u9ED8\u8BA4\u6309\u94AE</Button>
         <Button btnType='primary' ghost>\u4E3B\u8981\u6309\u94AE</Button>
@@ -65,4 +65,5 @@ export default () => {
       </Space>
     </div>
   );
-}`}}]);
+}
+`}}]);
