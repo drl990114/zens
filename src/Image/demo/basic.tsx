@@ -9,7 +9,7 @@ export default () => {
     <Image
       width={300}
       height={200}
-      src="https://app.requestly.io/delay/5000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpe"
+      src="https://picsum.photos/300/200"
     />
   );
 };
