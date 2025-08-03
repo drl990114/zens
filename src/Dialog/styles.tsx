@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const DialogWrapper = styled.div.attrs<{ width?: string, padding?: string }>((props) => ({
   ...props,
   width: props.width || `420px`,
-  padding: props.padding || `4px 6px`,
+  padding: props.padding || `12px`,
 }))`
   position: fixed;
   top: 50%;

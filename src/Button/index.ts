@@ -54,7 +54,6 @@ const sizeSpaceMap: Record<
     paddingHorizontal: string;
     paddingVertical: string;
     fontSize: string;
-    height: string;
     borderRadius: string;
   }
 > = {
@@ -62,22 +61,19 @@ const sizeSpaceMap: Record<
     paddingHorizontal: 'spaceXs',
     paddingVertical: 'spaceXs',
     fontSize: 'fontXs',
-    height: '24px',
     borderRadius: 'smallBorderRadius',
   },
   medium: {
-    paddingHorizontal: 'spaceL',
+    paddingHorizontal: 'spaceBase',
     paddingVertical: 'spaceSm',
-    fontSize: 'fontBase',
-    height: '32px',
+    fontSize: 'fontXs',
     borderRadius: 'smallBorderRadius',
   },
   large: {
-    paddingHorizontal: 'spaceXl',
-    paddingVertical: 'spaceSm',
-    fontSize: 'fontSm',
-    height: '40px',
-    borderRadius: 'midBorderRadius',
+    paddingHorizontal: 'spaceL',
+    paddingVertical: 'spaceBase',
+    fontSize: 'fontBase',
+    borderRadius: 'smallBorderRadius',
   },
 };
 
@@ -209,10 +205,6 @@ const Button: IStyledComponent<'web', ButtonProps> = styled(AkButton)
   font-size: ${(props) => {
     const sizeKey = props.size as ButtonSize || 'medium';
     return props.theme[sizeSpaceMap[sizeKey].fontSize];
-  }};
-  height: ${(props) => {
-    const sizeKey = props.size as ButtonSize || 'medium';
-    return props.theme[sizeSpaceMap[sizeKey].height];
   }};
   padding-left: ${(props) => {
     const sizeKey = props.size as ButtonSize || 'medium';
