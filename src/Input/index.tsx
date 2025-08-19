@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const InputComponent = styled.input`
   line-height: 22px;
-  padding: 6px 4px 6px 4px;
+  padding: 4px;
   border: 1px solid;
   color: ${(props) => props.theme.primaryFontColor};
   border-color: ${(props) => props.theme.borderColor};
