@@ -1,7 +1,7 @@
 import * as Spinners from 'react-spinners';
 
 import * as Icon from '@ant-design/icons';
-import * as AriaKit from '@ariakit/react';
+import * as Ariakit from '@ariakit/react';
 
 export { default as Button } from './Button';
 export { default as Dialog } from './Dialog';
@@ -12,6 +12,8 @@ export { default as Popover } from './Popover';
 export { default as Space } from './Space';
 export { default as Tooltip } from './Tooltip';
 
+export * from './Button';
+export * from './Input';
 export * from './Loading';
 export * from './Menu';
 export * from './Popover';
@@ -21,4 +23,4 @@ export * from './Theme';
 export * from './Toast';
 export * from './Tooltip';
 
-export { AriaKit, Icon, Spinners };
+export { Ariakit, Icon, Spinners };

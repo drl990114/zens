@@ -1,9 +1,9 @@
 import { KeyboardEventHandler } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-type InputSize = 'small' | 'medium' | 'large';
+export type InputSize = 'small' | 'medium' | 'large';
 
-interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   inputRef?: React.Ref<HTMLInputElement>;
   onPressEnter?: (e: KeyboardEvent) => void;
   /**
@@ -53,12 +53,12 @@ const InputComponent = styled.input<{ $size?: InputSize }>`
   border: 1px solid;
   outline: none;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  
+
   /* 基础样式 */
   color: ${(props) => props.theme.primaryFontColor};
   border-color: ${(props) => props.theme.borderColor};
   background-color: ${(props) => props.theme.bgColor};
-  
+
   /* 尺寸样式 */
   height: ${(props) => {
     const size = props.$size || 'medium';
@@ -118,7 +118,7 @@ const InputComponent = styled.input<{ $size?: InputSize }>`
   /* 错误状态 */
   &[data-error='true'] {
     border-color: ${(props) => props.theme.dangerColor};
-    
+
     &:focus {
       box-shadow: 0 0 0 2px ${(props) => `${props.theme.dangerColor}20`};
     }
@@ -142,11 +142,11 @@ const Input: React.FC<InputProps> = (props) => {
   };
 
   return (
-    <InputComponent 
-      ref={inputRef} 
+    <InputComponent
+      ref={inputRef}
       $size={size}
-      {...rest} 
-      onKeyDown={handleKeyDown} 
+      {...rest}
+      onKeyDown={handleKeyDown}
     />
   );
 };
