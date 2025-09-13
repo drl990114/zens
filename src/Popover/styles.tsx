@@ -6,7 +6,6 @@ export const PopoverWrapper: IStyledComponent<'web', typeof Ariakit.Popover> = s
   Ariakit.Popover,
 )`
   display: flex;
-  max-width: min(calc(100vw - 16px), 320px);
   flex-direction: column;
   border-radius: ${(props) => props.theme.smallBorderRadius};
   border-width: 1px;

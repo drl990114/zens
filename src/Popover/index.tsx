@@ -1,12 +1,12 @@
 // @ts-nocheck
 import type { PopoverProps as AkPopoverProps, PopoverProviderProps, PopoverStore } from '@ariakit/react';
 import { PopoverDisclosure, PopoverProvider, usePopoverStore } from '@ariakit/react';
+import { HTMLAttributes, useEffect } from 'react';
 import { Box } from '../Box';
 import { PopoverArrow, PopoverHeading, PopoverWrapper } from './styles';
-import { HTMLAttributes, useEffect } from 'react';
 
-export type { PopoverStore } from '@ariakit/react';
 export { usePopoverStore } from '@ariakit/react';
+export type { PopoverStore } from '@ariakit/react';
 
 type PopoverOptions = Pick<PopoverProviderProps, 'placement' | 'open'> &
   Partial<AkPopoverProps>;
