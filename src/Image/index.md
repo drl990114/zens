@@ -19,3 +19,7 @@ group:
 ### 空状态
 
 <code src="./demo/empty.tsx"></code>
+
+### 加载失败
+
+<code src="./demo/error.tsx"></code>

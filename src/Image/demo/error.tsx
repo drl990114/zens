@@ -5,7 +5,7 @@ export default () => {
     <Image
       width={300}
       height={200}
-      src="https://picsum.photos/300/200"
+      src="123"
     />
   );
 };

@@ -41,7 +41,7 @@ function Img(
   ref,
 ): JSX.Element | null {
   imgPromise = imgPromise || imagePromiseFactory({ decode, crossOrigin: crossorigin });
-  const { src, isLoading } = useImage({
+  const { src, isLoading, error } = useImage({
     srcList,
     imgPromise,
     useSuspense,
@@ -49,7 +49,7 @@ function Img(
 
   // console.log({src, isLoading, resolvedSrc, useSuspense})
 
-  if (!src && !isLoading) {
+  if ((!srcList || srcList?.length === 0) && !isLoading) {
     // nothing to show
     return emptyImage || <ImageEmpty emptyTip={emptyTip} />;
   }
