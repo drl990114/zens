@@ -1,10 +1,12 @@
+import { Icon } from '@/index';
+
 import ErrorTip from './ErrorTip';
 import Img, { ImgProps as RcImageProps } from './Img';
 
-import { Icon } from '@/index';
-
 interface ImageProps extends RcImageProps {
   errorTip?: string;
+  emptyImage?: JSX.Element | null;
+  emptyTip?: string;
 }
 
 const ImageView = (props: ImageProps) => {

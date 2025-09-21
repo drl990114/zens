@@ -229,6 +229,7 @@ const Button: IStyledComponent<'web', ButtonProps> = styled(AkButton)
   border-style: solid;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
   width: ${(props) => (props.block ? '100%' : 'auto')};
+  cursor: pointer;
 
   ${getButtonTypeStyles}
   ${getButtonShapeStyles}

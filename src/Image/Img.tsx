@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { forwardRef } from 'react';
 
+import { ImageEmpty } from './ImageEmpty';
 import imagePromiseFactory from './imagePromiseFactory';
 import useImage, { useImageProps } from './use-image';
 
@@ -33,6 +34,8 @@ function Img(
     imgPromise,
     crossorigin,
     useSuspense = false,
+    emptyImage = null,
+    emptyTip,
     ...imgProps // anything else will be passed to the <img> element
   }: ImgProps,
   ref,
@@ -45,6 +48,11 @@ function Img(
   });
 
   // console.log({src, isLoading, resolvedSrc, useSuspense})
+
+  if (!src && !isLoading) {
+    // nothing to show
+    return emptyImage || <ImageEmpty emptyTip={emptyTip} />;
+  }
 
   // show img if loaded
   if (src) return container(<img src={src} {...imgProps} ref={ref} />);
