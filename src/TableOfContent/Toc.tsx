@@ -1,13 +1,11 @@
 import React, {
   forwardRef,
-  memo,
   useCallback,
   useEffect,
   useImperativeHandle,
   useState,
 } from 'react';
 
-import { isEqual } from 'lodash';
 
 import type { IHeadingData } from './HeadingTree';
 import { HeadingTree, TraverseResult } from './HeadingTree';
@@ -36,8 +34,7 @@ export interface TocProps {
   Empty?: React.ReactNode;
 }
 
-export const Toc = memo(
-  forwardRef<TocRef, TocProps>((props, ref) => {
+export const Toc = forwardRef<TocRef, TocProps>((props, ref) => {
     const { headingsData, containerEl, scrollEl, autoExpand = false, Empty = null } = props;
     const [headings, setHeadings] = useState(headingsData);
     const [headingTree, setHeadingTree] = useState<HeadingTree>();
@@ -241,5 +238,4 @@ export const Toc = memo(
         </div>
       </TocDiv>
     );
-  }),
-);
+  });

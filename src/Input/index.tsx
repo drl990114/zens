@@ -143,9 +143,9 @@ const Input: React.FC<InputProps> = (props) => {
 
   return (
     <InputComponent
-      ref={inputRef}
       $size={size}
       {...rest}
+      ref={inputRef}
       onKeyDown={handleKeyDown}
     />
   );

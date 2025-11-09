@@ -1,12 +1,12 @@
-import { memo, useContext } from 'react';
+import { useContext } from 'react';
 import { Toaster } from 'sonner';
-import styled, { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components';
 
 export { toast } from 'sonner';
 
 export type Variant = 'default' | 'error' | 'warning' | 'info' | 'success';
 
-export const Notifications = memo(() => {
+export const Notifications = () => {
   const context = useContext(ThemeContext);
 
   return (
@@ -22,6 +22,6 @@ export const Notifications = memo(() => {
         },
         duration: 5000,
       }}
-    ></Toaster>
+    />
   );
-});
+};

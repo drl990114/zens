@@ -1,5 +1,6 @@
 export const styledLightTheme = {
   primaryFontColor: '#000000',
+  secondaryFontColor: '#5f5f5f',
   labelFontColor: '#9ca3af',
   accentColor: '#007acc',
   borderColor: '#d7d7dc',

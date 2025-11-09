@@ -1,10 +1,9 @@
-import React, { forwardRef, memo } from 'react'
+import React from 'react'
 
 export interface BoxProps extends BaseComponentProps {
   ref?: React.Ref<any>
 }
 
-export const Box = memo(forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
-  return <div ref={ref} {...props} />
-})
-)
+export const Box = (props: BoxProps) => {
+  return <div {...props} />
+}

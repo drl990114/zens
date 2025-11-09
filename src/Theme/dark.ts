@@ -1,5 +1,6 @@
 export const styledDarkTheme = {
   primaryFontColor: '#c8d1d9',
+  secondaryFontColor: '#999999',
   labelFontColor: 'rgba(255, 255, 255, 0.5)',
   accentColor: '#016ab3',
   borderColor: '#363b41',

@@ -1,4 +1,3 @@
-import type { IStyledComponent } from 'styled-components';
 import styled, { css } from 'styled-components';
 
 import type { ButtonProps as AkButtonProps } from '@ariakit/react';
@@ -51,10 +50,10 @@ export interface ButtonProps extends AkButtonProps {
 const sizeSpaceMap: Record<
   ButtonSize,
   {
-    paddingHorizontal: string;
-    paddingVertical: string;
-    fontSize: string;
-    borderRadius: string;
+    paddingHorizontal: 'spaceXs' | 'spaceBase' | 'spaceL';
+    paddingVertical: 'spaceXs' | 'spaceSm' | 'spaceBase';
+    fontSize: 'fontXs' | 'fontBase';
+    borderRadius: 'smallBorderRadius' | 'bigBorderRadius';
   }
 > = {
   small: {
@@ -186,7 +185,7 @@ const getButtonShapeStyles = (props: ButtonProps & { theme: any }) => {
   }
 };
 
-const Button: IStyledComponent<'web', ButtonProps> = styled(AkButton)
+const Button = styled(AkButton)
   .attrs<ButtonProps>((props) => ({
     ...defaultProps,
     ...props,
