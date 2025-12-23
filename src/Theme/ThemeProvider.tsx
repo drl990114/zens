@@ -1,7 +1,11 @@
-import isPropValid from '@emotion/is-prop-valid';
 import { createContext } from 'react';
-import { StyleSheetManager, ThemeProvider as ScThemeProvider } from 'styled-components';
+
+import antdTheme from 'antd/es/theme';
+import { ThemeProvider as ScThemeProvider, StyleSheetManager } from 'styled-components';
 import { darkTheme, lightTheme } from '.';
+
+import { XProvider } from '@ant-design/x';
+import isPropValid from '@emotion/is-prop-valid';
 
 type Props = {
   theme?: {
@@ -27,7 +31,17 @@ export const ThemeProvider: React.FC<Props> = ({ theme, children }: Props) => {
   return (
     <StyleSheetManager shouldForwardProp={shouldForwardProp}>
       <ScThemeProvider theme={themeToken}>
-        <ThemeContext.Provider value={themeToken}>{children}</ThemeContext.Provider>
+        <XProvider
+          theme={{
+            token: {
+              colorPrimary: defaultThemeToken.accentColor,
+            },
+            algorithm: mode === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+            zeroRuntime: true,
+          }}
+        >
+          <ThemeContext.Provider value={themeToken}>{children}</ThemeContext.Provider>
+        </XProvider>
       </ScThemeProvider>
     </StyleSheetManager>
   );
@@ -37,8 +51,8 @@ export const ThemeProvider: React.FC<Props> = ({ theme, children }: Props) => {
 function shouldForwardProp(propName: string, target: any) {
   if (typeof target === 'string') {
     // For HTML elements, forward the prop if it is a valid HTML attribute
-    return isPropValid(propName)
+    return isPropValid(propName);
   }
   // For other elements, forward all props
-  return true
+  return true;
 }
