@@ -23,3 +23,7 @@ group:
 ### 加载失败
 
 <code src="./demo/error.tsx"></code>
+
+### 懒加载
+
+<code src="./demo/lazy.tsx"></code>

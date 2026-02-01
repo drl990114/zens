@@ -43,6 +43,9 @@ export default function useImage({
   const [, setIsSettled] = useState(false);
   const sourceList = removeBlankArrayElements(stringToArray(srcList));
   const sourceKey = sourceList.join('');
+  if (sourceList.length === 0) {
+    return { src: undefined, isLoading: false, error: null };
+  }
 
   if (!cache[sourceKey]) {
     // create promise to loop through sources and try to load one

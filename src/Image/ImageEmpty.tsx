@@ -1,23 +1,30 @@
-import styled from "styled-components";
+import type { CSSProperties } from 'react';
+import styled from 'styled-components';
 
 interface ImageEmptyProps {
   emptyTip?: string;
+  style?: CSSProperties;
+  className?: string;
+  width?: number | string;
+  height?: number | string;
 }
 export const ImageEmpty = (props: ImageEmptyProps) => {
+  const { emptyTip, style, className, width = 100, height = 100 } = props;
+  const resolvedStyle = { width, height, ...style };
   return (
-    <Container>
-      {props.emptyTip || "Empty source"}
+    <Container style={resolvedStyle} className={className}>
+      {emptyTip || 'Empty source'}
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 100px;
-  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props => props.theme.errorTipColor};
-  border: 1px solid ${props => props.theme.borderColor};
-  font-size: 14px;
-`
+  color: ${(props) => props.theme.secondaryFontColor};
+  border: 1px solid ${(props) => props.theme.borderColor};
+  background: ${(props) => props.theme.tipsBgColor};
+  border-radius: ${(props) => props.theme.smallBorderRadius};
+  font-size: ${(props) => props.theme.fontSm};
+`;

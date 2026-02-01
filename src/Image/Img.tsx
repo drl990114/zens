@@ -1,5 +1,6 @@
 // @ts-nocheck
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { ThemeContext } from 'styled-components';
 
 import { ImageEmpty } from './ImageEmpty';
 import imagePromiseFactory from './imagePromiseFactory';
@@ -13,11 +14,20 @@ export type ImgProps = Omit<
     src: useImageProps['srcList']; // same types, different name
     loader?: JSX.Element | null;
     unloader?: JSX.Element | null;
+    loaderStyle?: React.CSSProperties;
+    unloaderStyle?: React.CSSProperties;
+    emptyStyle?: React.CSSProperties;
+    placeholderStyle?: React.CSSProperties;
     decode?: boolean;
     crossorigin?: string;
     container?: (children: React.ReactNode) => JSX.Element;
     loaderContainer?: (children: React.ReactNode) => JSX.Element;
     unloaderContainer?: (children: React.ReactNode) => JSX.Element;
+    lazy?: boolean;
+    lazyRoot?: Element | null;
+    lazyRootMargin?: string;
+    lazyThreshold?: number | number[];
+    lazyPlaceholder?: JSX.Element | null;
   };
 
 const passthroughContainer = (x) => x;
@@ -28,6 +38,10 @@ function Img(
     src: srcList = [],
     loader = null,
     unloader = null,
+    loaderStyle,
+    unloaderStyle,
+    emptyStyle,
+    placeholderStyle,
     container = passthroughContainer,
     loaderContainer = passthroughContainer,
     unloaderContainer = passthroughContainer,
@@ -36,32 +50,158 @@ function Img(
     useSuspense = false,
     emptyImage = null,
     emptyTip,
+    lazy = false,
+    lazyRoot = null,
+    lazyRootMargin = '0px',
+    lazyThreshold = 0,
+    lazyPlaceholder = null,
     ...imgProps // anything else will be passed to the <img> element
   }: ImgProps,
   ref,
 ): JSX.Element | null {
+  const theme = useContext(ThemeContext);
   imgPromise = imgPromise || imagePromiseFactory({ decode, crossOrigin: crossorigin });
+  const [isInView, setIsInView] = useState(!lazy);
+  const lazyRef = useRef<HTMLSpanElement | null>(null);
+  const shouldLoad = !lazy || isInView;
+  const resolvedSrcList = shouldLoad ? srcList : [];
+  const isSourceEmpty = useMemo(() => {
+    if (!srcList) return true;
+    if (Array.isArray(srcList)) return srcList.length === 0;
+    return srcList.length === 0;
+  }, [srcList]);
+  const baseSizeStyle = useMemo(
+    () => ({
+      width: imgProps.width,
+      height: imgProps.height,
+    }),
+    [imgProps.height, imgProps.width],
+  );
+  const defaultStateStyle = useMemo(
+    () => ({
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: theme?.tipsBgColor,
+      border: `1px solid ${theme?.borderColor}`,
+      borderRadius: theme?.smallBorderRadius ?? 6,
+      color: theme?.secondaryFontColor,
+      boxSizing: 'border-box',
+      ...baseSizeStyle,
+    }),
+    [baseSizeStyle, theme],
+  );
+  const placeholderContainerStyle = useMemo(
+    () => ({
+      ...defaultStateStyle,
+      ...(imgProps.style || {}),
+      ...(placeholderStyle || {}),
+    }),
+    [defaultStateStyle, imgProps.style, placeholderStyle],
+  );
+  const loaderContainerStyle = useMemo(
+    () => ({
+      ...defaultStateStyle,
+      ...(loaderStyle || {}),
+    }),
+    [defaultStateStyle, loaderStyle],
+  );
+  const unloaderContainerStyle = useMemo(
+    () => ({
+      ...defaultStateStyle,
+      background: theme?.tipsBgColor,
+      border: `1px solid ${theme?.dangerColor}`,
+      color: theme?.dangerColor,
+      ...(unloaderStyle || {}),
+    }),
+    [defaultStateStyle, theme, unloaderStyle],
+  );
+  const emptyContainerStyle = useMemo(
+    () => ({
+      ...defaultStateStyle,
+      background: theme?.tipsBgColor,
+      ...(emptyStyle || {}),
+    }),
+    [defaultStateStyle, theme, emptyStyle],
+  );
+  const emptyNode = useMemo(
+    () => emptyImage || <ImageEmpty emptyTip={emptyTip} style={emptyContainerStyle} />,
+    [emptyImage, emptyTip, emptyContainerStyle],
+  );
+  const errorUrl = useMemo(() => {
+    if (!srcList) return undefined;
+    if (Array.isArray(srcList)) return srcList[0];
+    return srcList;
+  }, [srcList]);
+  const resolvedImgProps = {
+    ...imgProps,
+    loading: imgProps.loading ?? (lazy ? 'lazy' : imgProps.loading),
+  };
   const { src, isLoading, error } = useImage({
-    srcList,
+    srcList: resolvedSrcList,
     imgPromise,
     useSuspense,
   });
 
-  // console.log({src, isLoading, resolvedSrc, useSuspense})
+  useEffect(() => {
+    if (!lazy) return;
+    if (isInView) return;
+    if (!lazyRef.current) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsInView(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting || entry?.intersectionRatio > 0) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      {
+        root: lazyRoot || null,
+        rootMargin: lazyRootMargin,
+        threshold: lazyThreshold,
+      },
+    );
+    observer.observe(lazyRef.current);
+    return () => observer.disconnect();
+  }, [isInView, lazy, lazyRef, lazyRoot, lazyRootMargin, lazyThreshold]);
+
+  if (lazy && !isInView) {
+    if (isSourceEmpty) return container(emptyNode);
+    const resolvedPlaceholder = lazyPlaceholder ?? loader;
+    const placeholderNode = (
+      <span ref={lazyRef} style={placeholderContainerStyle}>
+        {resolvedPlaceholder ? loaderContainer(resolvedPlaceholder) : null}
+      </span>
+    );
+    return container(placeholderNode);
+  }
 
   if ((!srcList || srcList?.length === 0) && !isLoading) {
     // nothing to show
-    return emptyImage || <ImageEmpty emptyTip={emptyTip} />;
+    return container(emptyNode);
   }
 
   // show img if loaded
-  if (src) return container(<img src={src} {...imgProps} ref={ref} />);
+  if (src) return container(<img src={src} {...resolvedImgProps} ref={ref} />);
 
   // show loader if we have one and were still trying to load image
-  if (!useSuspense && isLoading) return loaderContainer(loader);
+  if (!useSuspense && isLoading) {
+    const loaderNode = loader ? <span style={loaderContainerStyle}>{loader}</span> : null;
+    return loaderContainer(loaderNode);
+  }
 
   // show unloader if we have one and we have no more work to do
-  if (!useSuspense && unloader) return unloaderContainer(unloader);
+  if (!useSuspense && unloader) {
+    const resolvedUnloader = React.isValidElement(unloader)
+      ? React.cloneElement(unloader, { errorUrl })
+      : unloader;
+    const unloaderNode = <span style={unloaderContainerStyle}>{resolvedUnloader}</span>;
+    return unloaderContainer(unloaderNode);
+  }
 
   return null;
 }

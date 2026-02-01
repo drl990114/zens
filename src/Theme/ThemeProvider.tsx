@@ -4,7 +4,7 @@ import antdTheme from 'antd/es/theme';
 import { ThemeProvider as ScThemeProvider, StyleSheetManager } from 'styled-components';
 import { darkTheme, lightTheme } from '.';
 
-import { XProvider } from '@ant-design/x';
+import { XProvider, XProviderProps } from '@ant-design/x';
 import isPropValid from '@emotion/is-prop-valid';
 
 type Props = {
@@ -16,11 +16,12 @@ type Props = {
     token?: Record<string, any>;
   };
   children?: React.ReactNode;
+  antdThemeConfig?: XProviderProps['theme'];
 };
 
 export const ThemeContext = createContext<Record<string, string>>({});
 
-export const ThemeProvider: React.FC<Props> = ({ theme, children }: Props) => {
+export const ThemeProvider: React.FC<Props> = ({ theme, children, antdThemeConfig = {} }: Props) => {
   const mode = theme?.mode || 'light';
 
   const defaultThemeToken =
@@ -34,10 +35,11 @@ export const ThemeProvider: React.FC<Props> = ({ theme, children }: Props) => {
         <XProvider
           theme={{
             token: {
-              colorPrimary: defaultThemeToken.accentColor,
+              colorPrimary: themeToken.accentColor,
             },
             algorithm: mode === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
             zeroRuntime: true,
+            ...antdThemeConfig
           }}
         >
           <ThemeContext.Provider value={themeToken}>{children}</ThemeContext.Provider>

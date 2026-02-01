@@ -23,15 +23,26 @@ const ErrorTipContainer = styled.div`
     text-align: center;
     padding: 8px 16px;
   }
+
+  .zens-error-url {
+    max-width: 100%;
+    font-size: 11px;
+    line-height: 1.5;
+    color: ${props => props.theme.secondaryFontColor};
+    padding: 0 12px;
+    word-break: break-all;
+    text-align: center;
+  }
 `;
 
 export interface ErrorTipProps {
   errortip: string;
   height?: number;
   width?: number;
+  errorUrl?: string;
 }
 export const ErrorTip = (props: ErrorTipProps) => {
-  const { errortip, width = 100, height = 70 } = props;
+  const { errortip, width = 100, height = 70, errorUrl } = props;
 
   return (
     <ErrorTipContainer style={{ width: `${width}px`, height: `${height}px` }}>
@@ -64,6 +75,7 @@ export const ErrorTip = (props: ErrorTipProps) => {
       </div>
 
       <span className="zens-error-text">{errortip}</span>
+      {errorUrl ? <span className="zens-error-url">{errorUrl}</span> : null}
     </ErrorTipContainer>
   );
 };
