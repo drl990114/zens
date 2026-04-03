@@ -14,29 +14,28 @@ export const CommandDialogWrapper = styled.div.attrs<{ width?: string }>((props)
     display: flex;
     align-items: center;
     border-bottom: 1px solid ${(props) => props.theme.borderColor};
-    padding: 0;
+    padding: 0.5rem 0.75rem;
   }
 
   .mf-command-dialog__dismiss {
     display: flex;
-    padding: 6px;
+    padding: 0.25rem 0.5rem;
     outline: none;
     align-items: center;
     justify-content: center;
-    border-radius: 0.375rem;
-    border-style: none;
+    border-radius: 0.25rem;
+    border: 1px solid ${(props) => props.theme.borderColor};
     background-color: transparent;
-    font-size: 1rem;
+    font-size: 0.75rem;
     color: ${(props) => props.theme.secondaryFontColor};
-    background-color: ${(props) => props.theme.hoverColor};
     font-weight: 500;
-    margin-right: 0.75rem;
+    margin-left: 0.5rem;
     flex-shrink: 0;
     cursor: pointer;
+    height: 1.75rem;
 
     &:hover {
-      background-color: ${(props) => props.theme.accentColor};
-      color: ${(props) => props.theme.white};
+      background-color: ${(props) => props.theme.hoverColor};
     }
   }
 
@@ -44,7 +43,7 @@ export const CommandDialogWrapper = styled.div.attrs<{ width?: string }>((props)
     flex: 1;
     min-height: 0;
     overflow-y: auto;
-    padding: 0.5rem 0;
+    padding: 0.25rem 0;
   }
 `;
 
@@ -64,13 +63,13 @@ export const CommandInput = styled.input`
   outline: none;
   background: transparent;
   color: ${(props) => props.theme.primaryFontColor};
-  font-size: 1rem;
-  padding: 6px 12px;
-  min-height: 40px;
+  font-size: 1.125rem;
+  padding: 0.25rem 0;
+  min-height: 2.5rem;
 
   &::placeholder {
     color: ${(props) => props.theme.secondaryFontColor};
-    opacity: 0.8;
+    opacity: 0.5;
   }
 
   &:focus {
@@ -107,19 +106,19 @@ export const CommandItem = styled.div`
   cursor: pointer;
   user-select: none;
   align-items: center;
-  border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  margin: 0 0.5rem;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  margin: 0 0.25rem;
   font-size: 0.875rem;
   outline: none;
   color: ${(props) => props.theme.primaryFontColor};
-  transition: all 0.15s ease;
+  transition: all 0.1s ease;
 
   &:hover,
   &[aria-selected='true'],
   &[data-active-item] {
-    background-color: ${(props) => props.theme.accentColor};
-    color: ${(props) => props.theme.white};
+    background-color: ${(props) => props.theme.hoverColor};
+    color: ${(props) => props.theme.primaryFontColor};
   }
 
   &.mf-command-dialog__item--disabled {
@@ -132,7 +131,7 @@ export const CommandItem = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .mf-command-dialog__item-icon {
@@ -157,15 +156,15 @@ export const CommandItem = styled.div`
 
   .mf-command-dialog__item-description {
     font-size: 0.75rem;
-    opacity: 0.8;
+    opacity: 0.5;
     line-height: 1.25;
-    margin-top: 0.125rem;
+    margin-top: 0.0625rem;
   }
 
   .mf-command-dialog__item-shortcut {
     font-size: 0.75rem;
-    opacity: 0.8;
-    background-color: ${(props) => props.theme.tipsBgColor || 'rgba(255, 255, 255, 0.1)'};
+    opacity: 0.5;
+    background-color: transparent;
     padding: 0.125rem 0.375rem;
     border-radius: 0.25rem;
     border: 1px solid ${(props) => props.theme.borderColor};
@@ -175,8 +174,8 @@ export const CommandItem = styled.div`
   &:hover .mf-command-dialog__item-shortcut,
   &[aria-selected='true'] .mf-command-dialog__item-shortcut,
   &[data-active-item] .mf-command-dialog__item-shortcut {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
+    background-color: ${(props) => props.theme.borderColor};
+    border-color: ${(props) => props.theme.borderColor};
   }
 `;
 
@@ -184,14 +183,14 @@ export const CommandEmpty = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 1.25rem 1rem;
   font-size: 0.875rem;
   color: ${(props) => props.theme.secondaryFontColor};
   text-align: center;
 `;
 
 export const CommandGroup = styled.div`
-  padding: 0.5rem 1rem 0.25rem 1rem;
+  padding: 0.375rem 0.75rem 0.125rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 600;
   color: ${(props) => props.theme.secondaryFontColor};
@@ -203,5 +202,5 @@ export const CommandGroup = styled.div`
 export const CommandSeparator = styled.div`
   height: 1px;
   background-color: ${(props) => props.theme.borderColor};
-  margin: 0.5rem 0.75rem;
+  margin: 0.125rem 0.75rem;
 `;

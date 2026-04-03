@@ -141,8 +141,14 @@ const CommandDialog: React.FC<CommandDialogProps> = (props) => {
     <Dialog
       onClose={onClose}
       hideDismiss
-      width="70vw"
-      style={{ padding: '10px', top: '100px', transform: 'translate(-50%, 0%)' }}
+      width="600px"
+      style={{
+        top: '100px',
+        transform: 'translate(-50%, 0%)',
+        maxHeight: '70vh',
+        borderRadius: '8px',
+        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
+      }}
       {...rest}
     >
       <CommandDialogWrapper>
