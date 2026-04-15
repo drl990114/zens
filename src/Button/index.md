@@ -49,6 +49,10 @@ group:
 
 <code src="./demo/block.tsx"></code>
 
+### 加载状态
+
+<code src="./demo/loading.tsx"></code>
+
 ## API
 
 | 属性 | 说明 | 类型 | 默认值 |
@@ -58,6 +62,7 @@ group:
 | danger | 设置危险按钮 | boolean | false |
 | disabled | 设置按钮失效状态 | boolean | false |
 | ghost | 幽灵属性，使按钮背景透明 | boolean | false |
+| loading | 设置按钮载入状态 | boolean \| { delay: number, icon: ReactNode } | false |
 | shape | 设置按钮形状 | `default` \| `rect` | `default` |
 | size | 设置按钮大小 | `large` \| `medium` \| `small` | `medium` |
 

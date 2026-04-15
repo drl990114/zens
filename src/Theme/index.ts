@@ -24,6 +24,7 @@ export const common = {
   fontSm: '14px',
   fontXs: '13px',
 
+  spaceXXs: '2px',
   spaceXs: '4px',
   spaceSm: '8px',
   spaceBase: '10px',

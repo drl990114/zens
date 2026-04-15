@@ -39,6 +39,7 @@ const Tooltip = ({
   fixed = false,
   placement = fixed ? 'top' : 'bottom',
   open,
+  popover: _popover,
   ...rest
 }: TooltipProps) => {
   const child = (children as JSX.Element)?.props?.disabled
@@ -53,7 +54,10 @@ const Tooltip = ({
   return (
     <Ariakit.TooltipProvider placement={placement} open={open}>
       <Ariakit.TooltipAnchor render={child} />
-      <Ariakit.Tooltip render={p => <Box style={{ zIndex: 99 }} {...p} {...rest} />}>
+      <Ariakit.Tooltip render={p => {
+        const { popover: __, ...boxProps } = p;
+        return <Box style={{ zIndex: 99 }} {...boxProps as React.HTMLAttributes<HTMLDivElement>} {...rest} />;
+      }}>
         <TooltipWrapper>{title}</TooltipWrapper>
       </Ariakit.Tooltip>
     </Ariakit.TooltipProvider>

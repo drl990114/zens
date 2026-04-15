@@ -1,5 +1,7 @@
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
+import { LoadingOutlined } from '@ant-design/icons';
 import type { ButtonProps as AkButtonProps } from '@ariakit/react';
 import { Button as AkButton } from '@ariakit/react';
 
@@ -45,38 +47,48 @@ export interface ButtonProps extends AkButtonProps {
    * @default false
    */
   block?: boolean;
+
+  /**
+   * 是否加载中
+   * @default false
+   */
+  loading?: boolean | { delay?: number; icon?: React.ReactNode };
 }
 
 const sizeSpaceMap: Record<
   ButtonSize,
   {
     paddingHorizontal: 'spaceXs' | 'spaceBase' | 'spaceL';
-    paddingVertical: 'spaceXs' | 'spaceSm' | 'spaceBase';
+    paddingVertical: 'spaceXXs' | 'spaceXs' | 'spaceSm';
     fontSize: 'fontXs' | 'fontBase';
     borderRadius: 'smallBorderRadius' | 'bigBorderRadius';
+    iconSize: number;
   }
 > = {
   small: {
     paddingHorizontal: 'spaceXs',
-    paddingVertical: 'spaceXs',
+    paddingVertical: 'spaceXXs',
     fontSize: 'fontXs',
     borderRadius: 'smallBorderRadius',
+    iconSize: 12,
   },
   medium: {
     paddingHorizontal: 'spaceBase',
-    paddingVertical: 'spaceSm',
+    paddingVertical: 'spaceXs',
     fontSize: 'fontXs',
     borderRadius: 'smallBorderRadius',
+    iconSize: 14,
   },
   large: {
     paddingHorizontal: 'spaceL',
-    paddingVertical: 'spaceBase',
+    paddingVertical: 'spaceXs',
     fontSize: 'fontBase',
     borderRadius: 'smallBorderRadius',
+    iconSize: 16,
   },
 };
 
-const defaultProps: ButtonProps = {
+const defaultProps: Partial<ButtonProps> = {
   size: 'medium',
   btnType: 'default',
   shape: 'default',
@@ -185,19 +197,20 @@ const getButtonShapeStyles = (props: ButtonProps & { theme: any }) => {
   }
 };
 
-const Button = styled(AkButton)
+const StyledButton = styled(AkButton)
   .attrs<ButtonProps>((props) => ({
     ...defaultProps,
     ...props,
   }))
   .withConfig({
     shouldForwardProp: (propName: string) =>
-      !['btnType', 'size', 'shape', 'danger', 'ghost', 'block'].includes(propName),
+      !['btnType', 'size', 'shape', 'danger', 'ghost', 'block', 'loading'].includes(propName),
   })`
   display: flex;
   user-select: none;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   margin: 0;
   white-space: nowrap;
   font-weight: 400;
@@ -266,6 +279,80 @@ const Button = styled(AkButton)
           : 'rgba(0, 0, 0, 0.1)';
     }};
   }
+
+  /* Loading state */
+  &[data-loading='true'] {
+    cursor: default;
+    opacity: 0.8;
+    pointer-events: none;
+  }
 `;
+
+const LoadingIconWrapper = styled.span`
+  display: inline-flex;
+  align-items: center;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loading-icon {
+    animation: spin 1s linear infinite;
+  }
+`;
+
+const Button: React.FC<ButtonProps> = (props) => {
+  const { loading, children, ...restProps } = props;
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (typeof loading === 'boolean') {
+      setIsLoading(loading);
+    } else if (loading && typeof loading === 'object') {
+      const delay = loading.delay || 0;
+      if (delay > 0) {
+        const timer = setTimeout(() => {
+          setIsLoading(true);
+        }, delay);
+        return () => clearTimeout(timer);
+      } else {
+        setIsLoading(true);
+      }
+    } else {
+      setIsLoading(false);
+    }
+  }, [loading]);
+
+  const getLoadingIcon = () => {
+    if (typeof loading === 'object' && loading?.icon) {
+      return loading.icon;
+    }
+
+    const sizeKey = (props.size as ButtonSize) || 'medium';
+    const iconSize = sizeSpaceMap[sizeKey].iconSize;
+
+    return (
+      <LoadingIconWrapper>
+        <LoadingOutlined className="loading-icon" style={{ fontSize: iconSize }} />
+      </LoadingIconWrapper>
+    );
+  };
+
+  return (
+    <StyledButton
+      data-loading={isLoading}
+      {...restProps}
+    >
+      {isLoading && getLoadingIcon()}
+      {children}
+    </StyledButton>
+  );
+};
 
 export default Button;
