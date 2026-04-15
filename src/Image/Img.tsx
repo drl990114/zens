@@ -32,6 +32,25 @@ export type ImgProps = Omit<
 
 const passthroughContainer = (x) => x;
 
+const useContainerStyle = (
+  baseStyle: React.CSSProperties,
+  theme: any,
+  customStyle?: React.CSSProperties,
+) => {
+  return useMemo(() => ({
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: theme?.tipsBgColor,
+    border: `1px solid ${theme?.borderColor}`,
+    borderRadius: theme?.smallBorderRadius ?? 6,
+    color: theme?.secondaryFontColor,
+    boxSizing: 'border-box',
+    ...baseStyle,
+    ...customStyle,
+  }), [baseStyle, theme, customStyle]);
+};
+
 function Img(
   {
     decode = true,
@@ -55,7 +74,7 @@ function Img(
     lazyRootMargin = '0px',
     lazyThreshold = 0,
     lazyPlaceholder = null,
-    ...imgProps // anything else will be passed to the <img> element
+    ...imgProps
   }: ImgProps,
   ref,
 ): JSX.Element | null {
@@ -65,11 +84,13 @@ function Img(
   const lazyRef = useRef<HTMLSpanElement | null>(null);
   const shouldLoad = !lazy || isInView;
   const resolvedSrcList = shouldLoad ? srcList : [];
+
   const isSourceEmpty = useMemo(() => {
     if (!srcList) return true;
     if (Array.isArray(srcList)) return srcList.length === 0;
     return srcList.length === 0;
   }, [srcList]);
+
   const baseSizeStyle = useMemo(
     () => ({
       width: imgProps.width,
@@ -77,66 +98,39 @@ function Img(
     }),
     [imgProps.height, imgProps.width],
   );
-  const defaultStateStyle = useMemo(
-    () => ({
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: theme?.tipsBgColor,
-      border: `1px solid ${theme?.borderColor}`,
-      borderRadius: theme?.smallBorderRadius ?? 6,
-      color: theme?.secondaryFontColor,
-      boxSizing: 'border-box',
-      ...baseSizeStyle,
-    }),
-    [baseSizeStyle, theme],
-  );
-  const placeholderContainerStyle = useMemo(
-    () => ({
-      ...defaultStateStyle,
-      ...(imgProps.style || {}),
-      ...(placeholderStyle || {}),
-    }),
-    [defaultStateStyle, imgProps.style, placeholderStyle],
-  );
-  const loaderContainerStyle = useMemo(
-    () => ({
-      ...defaultStateStyle,
-      ...(loaderStyle || {}),
-    }),
-    [defaultStateStyle, loaderStyle],
-  );
-  const unloaderContainerStyle = useMemo(
-    () => ({
-      ...defaultStateStyle,
-      background: theme?.tipsBgColor,
-      border: `1px solid ${theme?.dangerColor}`,
-      color: theme?.dangerColor,
-      ...(unloaderStyle || {}),
-    }),
-    [defaultStateStyle, theme, unloaderStyle],
-  );
-  const emptyContainerStyle = useMemo(
-    () => ({
-      ...defaultStateStyle,
-      background: theme?.tipsBgColor,
-      ...(emptyStyle || {}),
-    }),
-    [defaultStateStyle, theme, emptyStyle],
-  );
+
+  const placeholderContainerStyle = useContainerStyle(baseSizeStyle, theme, {
+    ...imgProps.style,
+    ...placeholderStyle,
+  });
+
+  const loaderContainerStyle = useContainerStyle(baseSizeStyle, theme, loaderStyle);
+
+  const unloaderContainerStyle = useContainerStyle(baseSizeStyle, theme, {
+    background: theme?.tipsBgColor,
+    border: `1px solid ${theme?.dangerColor}`,
+    color: theme?.dangerColor,
+    ...unloaderStyle,
+  });
+
+  const emptyContainerStyle = useContainerStyle(baseSizeStyle, theme, emptyStyle);
+
   const emptyNode = useMemo(
     () => emptyImage || <ImageEmpty emptyTip={emptyTip} style={emptyContainerStyle} />,
     [emptyImage, emptyTip, emptyContainerStyle],
   );
+
   const errorUrl = useMemo(() => {
     if (!srcList) return undefined;
     if (Array.isArray(srcList)) return srcList[0];
     return srcList;
   }, [srcList]);
+
   const resolvedImgProps = {
     ...imgProps,
     loading: imgProps.loading ?? (lazy ? 'lazy' : imgProps.loading),
   };
+
   const { src, isLoading, error } = useImage({
     srcList: resolvedSrcList,
     imgPromise,
@@ -144,13 +138,13 @@ function Img(
   });
 
   useEffect(() => {
-    if (!lazy) return;
-    if (isInView) return;
-    if (!lazyRef.current) return;
+    if (!lazy || isInView || !lazyRef.current) return;
+
     if (typeof IntersectionObserver === 'undefined') {
       setIsInView(true);
       return;
     }
+
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -165,12 +159,14 @@ function Img(
         threshold: lazyThreshold,
       },
     );
+
     observer.observe(lazyRef.current);
     return () => observer.disconnect();
-  }, [isInView, lazy, lazyRef, lazyRoot, lazyRootMargin, lazyThreshold]);
+  }, [isInView, lazy, lazyRoot, lazyRootMargin, lazyThreshold]);
 
   if (lazy && !isInView) {
     if (isSourceEmpty) return container(emptyNode);
+
     const resolvedPlaceholder = lazyPlaceholder ?? loader;
     const placeholderNode = (
       <span ref={lazyRef} style={placeholderContainerStyle}>
@@ -180,21 +176,19 @@ function Img(
     return container(placeholderNode);
   }
 
-  if ((!srcList || srcList?.length === 0) && !isLoading) {
-    // nothing to show
+  if (isSourceEmpty && !isLoading) {
     return container(emptyNode);
   }
 
-  // show img if loaded
-  if (src) return container(<img src={src} {...resolvedImgProps} ref={ref} />);
+  if (src) {
+    return container(<img src={src} {...resolvedImgProps} ref={ref} />);
+  }
 
-  // show loader if we have one and were still trying to load image
   if (!useSuspense && isLoading) {
     const loaderNode = loader ? <span style={loaderContainerStyle}>{loader}</span> : null;
     return loaderContainer(loaderNode);
   }
 
-  // show unloader if we have one and we have no more work to do
   if (!useSuspense && unloader) {
     const resolvedUnloader = React.isValidElement(unloader)
       ? React.cloneElement(unloader, { errorUrl })

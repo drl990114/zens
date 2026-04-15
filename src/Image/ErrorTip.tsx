@@ -6,10 +6,13 @@ const ErrorTipContainer = styled.div`
   justify-content: center;
   align-items: center;
   color: ${props => props.theme.errorTipColor};
+  overflow: hidden;
+  max-width: 100%;
 
   .zens-error-icon-box {
     width: 40px;
     height: 40px;
+    flex-shrink: 0;
   }
 
   .zens-error-icon {
@@ -22,6 +25,8 @@ const ErrorTipContainer = styled.div`
     line-height: 1.6667;
     text-align: center;
     padding: 8px 16px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .zens-error-url {
@@ -32,6 +37,12 @@ const ErrorTipContainer = styled.div`
     padding: 0 12px;
     word-break: break-all;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    box-sizing: border-box;
   }
 `;
 
@@ -75,7 +86,11 @@ export const ErrorTip = (props: ErrorTipProps) => {
       </div>
 
       <span className="zens-error-text">{errortip}</span>
-      {errorUrl ? <span className="zens-error-url">{errorUrl}</span> : null}
+      {errorUrl ? (
+        <span className="zens-error-url" title={errorUrl}>
+          {errorUrl}
+        </span>
+      ) : null}
     </ErrorTipContainer>
   );
 };
